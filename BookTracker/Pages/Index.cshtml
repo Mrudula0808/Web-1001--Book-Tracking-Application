@@ -1,0 +1,48 @@
+﻿@page
+@model BookTracker.Pages.Books.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="set-header">Books</h1>
+
+<p>
+    <a class="btn-primary set-button" asp-page="/Admin/Books/Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Categories)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Author)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Book) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categories.NameToken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                <a class="btn-success set-button" asp-page="./Admin/Books/Edit" asp-route-id="@item.ISBNNumber">Edit</a> |
+                <a class="btn-primary set-button" asp-page="./Admin/Books/Details" asp-route-id="@item.ISBNNumber">Details</a> |
+                <a class="btn-danger set-button" asp-page="./Admin/Books/Delete" asp-route-id="@item.ISBNNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
